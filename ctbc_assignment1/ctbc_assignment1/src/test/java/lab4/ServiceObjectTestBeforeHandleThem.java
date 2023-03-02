@@ -16,8 +16,8 @@ public class ServiceObjectTestBeforeHandleThem {
 		int n = new Scanner(System.in).nextInt();
 		System.out.printf("Add Service Object to Set... \n");
 		for (int i = 0; i < n; i++) {
-			allCategoryServices.add(new CourseCategoryServiceJDKImplement());
-			allCourseServices.add(new CourseServiceJDKImplement());
+//			allCategoryServices.add(new CourseCategoryServiceJDKImplement());
+//			allCourseServices.add(new CourseServiceJDKImplement());
 		}
 		System.out.printf("Complete. \n\n");
 

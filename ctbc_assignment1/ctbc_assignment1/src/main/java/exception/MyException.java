@@ -1,70 +1,33 @@
 package exception;
 
-import model.Course;
-import model.CourseCategory;
-import service.CourseCategoryServiceJDKImplement;
-import service.CourseServiceJDKImplement;
-
 public class MyException {
 
-	private CourseCategoryServiceJDKImplement ccs;
-	private CourseServiceJDKImplement cs;
+	private volatile static MyException exception = new MyException();
 
-	public MyException(CourseCategoryServiceJDKImplement ccs, CourseServiceJDKImplement cs) {
+	public final static int CourseExist = 0;
+	public final static int CategoryExist = 1;
+	public final static int WrongParameterType = 2;
+
+	private MyException() {
 		super();
-		this.ccs = ccs;
-		this.cs = cs;
 	}
 
-	public MyException(CourseCategoryServiceJDKImplement ccs) {
-		super();
-		this.ccs = ccs;
+	public static MyException getInstance() {
+		return exception;
 	}
 
-	public MyException(CourseServiceJDKImplement cs) {
-		super();
-		this.cs = cs;
-	}
-
-	// Check if the courseCategory is Exist(Allow to search from String
-	// courseCategoryName or courseCategory Object
-	public <T> boolean isCourseCategoryExist(T courseCategory) {
-		for (CourseCategory cc : ccs.getAllCourseCategories()) {
-			if (courseCategory instanceof String && cc.getCourseCategoryName().equals(courseCategory)) {
-				System.out.printf("Category '%s' is exist!!!\n", (String) courseCategory);
-				return true;
-			}
-
-			else if (courseCategory instanceof CourseCategory && cc.equals(courseCategory)) {
-				System.out.printf("Category '%s' is exist!!!\n",
-						((CourseCategory) courseCategory).getCourseCategoryName());
-				return true;
-			}
-
-			else { // Other T type
-				System.out.printf("Wrong type of parameter, please use 'String' or 'CourseCategory' Object.\n");
-				return false;
-			}
-
+	public void errorMessage(int status) {
+		switch (status) {
+		case CourseExist:
+			System.out.printf("Error: Course is exist \n");
+			break;
+		case CategoryExist:
+			System.out.printf("Error: Category is exist \n");
+			break;
+		case WrongParameterType:
+			System.out.printf("Error: Wrong parameter type \n");
+			break;
 		}
-
-		return false;
-	}
-
-	public <T> boolean isCourseExist(T course) {
-		for (Course c : cs.getAllCourses()) {
-			if (course instanceof String && c.getCourseName().equals(course)) {
-				System.out.printf("Course '%s' is exist!!!\n", (String) course);
-				return true;
-			} else if (course instanceof Course && c.equals(course)) {
-				System.out.printf("Course '%s' is exist!!!\n", ((Course) course).getCourseName());
-				return true;
-			} else {
-				System.out.printf("Wrong type of parameter, please use 'String' or 'Course' Object.\n");
-				return false;
-			}
-		}
-		return false;
 
 	}
 

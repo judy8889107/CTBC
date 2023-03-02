@@ -8,10 +8,8 @@ import service.CourseServiceJDKImplement;
 public class ServiceTest {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		CourseCategoryServiceJDKImplement categoryService = new CourseCategoryServiceJDKImplement();
-		CourseServiceJDKImplement courseService = new CourseServiceJDKImplement();
-		// TODO:Optimize setter method
-		courseService.setCourseCategoryService(categoryService);
+		CourseCategoryServiceJDKImplement categoryService = CourseCategoryServiceJDKImplement.getInstance();
+		CourseServiceJDKImplement courseService = CourseServiceJDKImplement.getInstance();
 		String opt = "";
 		do {
 
